@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Tugas 2</title>
+
+    <!-- CSS Eksternal -->
+    <link rel="stylesheet" href="form.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>FORM DATA MAHASISWA</h2>
+
+        <form action="#" method="post">
+
+            <!-- Text -->
+            <label for="nama">Nama Lengkap</label>
+            <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap">
+
+            <!-- Password -->
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Masukkan password">
+
+            <!-- Select Option -->
+            <label for="jurusan">Jurusan</label>
+            <select id="jurusan" name="jurusan">
+                <option value="">-- Pilih Jurusan --</option>
+                <option value="ti">Teknologi Informasi</option>
+                <option value="ilkom">Ilmu Komputer</option>
+                <option value="si">Sistem Informasi</option>
+                <option value="te">Teknik Elektro</option>
+            </select>
+
+            <!-- Radio Button -->
+            <label>Jenis Kelamin</label>
+            <div class="radio-group">
+                <input type="radio" id="laki" name="jk" value="Laki-laki">
+                <label for="laki">Laki-laki</label>
+
+                <input type="radio" id="perempuan" name="jk" value="Perempuan">
+                <label for="perempuan">Perempuan</label>
+            </div>
+
+            <!-- Checkbox -->
+            <label>Hobi</label>
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" name="hobi" value="coding">
+                    Coding
+                </label>
+
+                <label>
+                    <input type="checkbox" name="hobi" value="gaming">
+                    Gaming
+                </label>
+
+                <label>
+                    <input type="checkbox" name="hobi" value="musik">
+                    Musik
+                </label>
+            </div>
+
+            <!-- Textarea -->
+            <label for="alamat">Alamat</label>
+            <textarea id="alamat" name="alamat" rows="5"
+                placeholder="Masukkan alamat lengkap"></textarea>
+
+            <!-- Submit -->
+            <input type="submit" value="Kirim Data" class="submit-btn">
+
+        </form>
+    </div>
+
+</body>
+</html>
