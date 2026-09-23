@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latihan / Tugas - Kalkulator Aritmatika</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+        min-height: 100vh;
+        background: #f3f4f2;
+        color: #555;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 25px;
+    }
+
+    .page {
+        width: min(1280px, 100%);
+        min-height: 760px;
+        background: #fff;
+        padding: 48px 70px 55px;
+        box-shadow: 0 2px 12px rgba(0,0,0,.08);
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Bagian header */
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 45px;
+    }
+
+    .universitas {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+    }
+
+    .logos {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+
+    .logo-circle {
+        width: 47px;
+        height: 47px;
+        border-radius: 50%;
+        border: 2px solid #d0d0d0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #668c99;
+        font-size: 20px;
+        font-weight: bold;
+        background: #f8faf9;
+    }
+
+    .logo-circle.gold {
+        color: #a49463;
+    }
+
+    .uni-name {
+        font-size: 20px;
+        line-height: 1.15;
+        color: #626262;
+    }
+
+    .uni-name strong {
+        font-weight: 500;
+    }
+
+    .excellence {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #666;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 1.05;
+    }
+
+    .excellence-mark {
+        width: 48px;
+        height: 48px;
+        border-radius: 50% 45% 50% 45%;
+        background: linear-gradient(135deg, #f4cf77 0 45%, #75b58c 46% 100%);
+        transform: rotate(-25deg);
+    }
+
+    /* Judul */
+    .title {
+        text-align: center;
+        color: #65b985;
+        font-size: clamp(32px, 4vw, 48px);
+        font-weight: 700;
+        margin-bottom: 32px;
+    }
+
+    .instruction {
+        width: 88%;
+        margin: 0 auto 38px;
+        color: #666;
+        font-size: clamp(22px, 2.4vw, 32px);
+        line-height: 1.18;
+    }
+
+    /* Kotak kalkulator */
+    .calculator {
+        width: 78%;
+        margin: 0 auto;
+        border: 1.5px solid #cfcfcf;
+        padding: 27px 35px 32px;
+        background: #fff;
+    }
+
+    .row {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 16px;
+    }
+
+    .label {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(22px, 2.2vw, 31px);
+        color: #4d4d4d;
+        white-space: nowrap;
+    }
+
+    input[type="number"] {
+        width: 100%;
+        height: 54px;
+        border: 1.5px solid #cfcfcf;
+        border-radius: 5px;
+        padding: 0 13px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 23px;
+        color: #555;
+        outline: none;
+    }
+
+    input[type="number"]:focus {
+        border-color: #79b995;
+        box-shadow: 0 0 0 2px rgba(121,185,149,.12);
+    }
+
+    .operator-area {
+        grid-column: 2;
+        display: flex;
+        gap: 12px;
+        margin-top: -2px;
+        margin-bottom: 17px;
+    }
+
+    .operator {
+        width: 68px;
+        height: 58px;
+        border: 1.5px solid #cfcfcf;
+        border-radius: 5px;
+        background: #fff;
+        color: #555;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 29px;
+        cursor: pointer;
+        transition: .15s ease;
+    }
+
+    .operator:hover {
+        background: #f0f8f3;
+        border-color: #77b992;
+    }
+
+    .operator.active {
+        background: #eef8f1;
+        border-color: #67ad84;
+    }
+
+    .output {
+        width: 100%;
+        height: 58px;
+        border: 1.5px solid #cfcfcf;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        padding: 0 13px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 25px;
+        color: #555;
+        background: #fff;
+    }
+
+    .output-row {
+        margin-top: 4px;
+    }
+
+    @media (max-width: 900px) {
+        .page {
+            padding: 30px 25px 40px;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .instruction,
+        .calculator {
+            width: 100%;
+        }
+
+        .calculator {
+            padding: 22px;
+        }
+
+        .row {
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+
+        .operator-area {
+            grid-column: 1;
+            margin-top: 0;
+        }
+    }
+
+    @media (max-width: 600px) {
+        body {
+            padding: 0;
+            align-items: stretch;
+        }
+
+        .page {
+            min-height: 100vh;
+            padding: 22px 16px 30px;
+        }
+
+        .uni-name {
+            font-size: 14px;
+        }
+
+        .logo-circle {
+            width: 35px;
+            height: 35px;
+            font-size: 14px;
+        }
+
+        .excellence {
+            font-size: 11px;
+        }
+
+        .excellence-mark {
+            width: 32px;
+            height: 32px;
+        }
+
+        .instruction {
+            font-size: 20px;
+        }
+
+        .calculator {
+            padding: 18px;
+        }
+
+        .operator {
+            width: 55px;
+            height: 50px;
+        }
+    }
+</style>
+</head>
+
+<body>
+<div class="page">
+
+    <header class="header">
+        <div class="universitas">
+            <div class="logos">
+                <div class="logo-circle">✦</div>
+                <div class="logo-circle gold">USU</div>
+                <div class="logo-circle">◉</div>
+            </div>
+            <div class="uni-name">
+                <strong>Universitas<br>Sumatera Utara</strong>
+            </div>
+        </div>
+
+        <div class="excellence">
+            <div class="excellence-mark"></div>
+            <span>The Era of<br>Ultimate<br>Excellence</span>
+        </div>
+    </header>
+
+    <h1 class="title">Latihan / Tugas</h1>
+
+    <p class="instruction">
+        Modifikasi Script sebelumnya dan buatlah kode program<br>
+        aritmatika sederhana (+, -, *, /) untuk 2 inputan<br>
+        bilangan dengan menggunakan JavaScript.
+    </p>
+
+    <section class="calculator">
+        <div class="row">
+            <label class="label" for="bil1">Input Bilangan 1</label>
+            <input id="bil1" type="number" value="9">
+        </div>
+
+        <div class="row">
+            <label class="label" for="bil2">Input Bilangan 2</label>
+            <input id="bil2" type="number" value="3">
+        </div>
+
+        <div class="operator-area">
+            <button class="operator" data-op="+" aria-label="Tambah">+</button>
+            <button class="operator" data-op="-" aria-label="Kurang">-</button>
+            <button class="operator" data-op="*" aria-label="Kali">X</button>
+            <button class="operator active" data-op="/" aria-label="Bagi">/</button>
+        </div>
+
+        <div class="row output-row">
+            <div class="label">Output</div>
+            <div class="output" id="output">3</div>
+        </div>
+    </section>
+</div>
+
+<script>
+    const bil1 = document.getElementById("bil1");
+    const bil2 = document.getElementById("bil2");
+    const output = document.getElementById("output");
+    const buttons = document.querySelectorAll(".operator");
+
+    let operasi = "/";
+
+    function hitung() {
+        const a = parseFloat(bil1.value);
+        const b = parseFloat(bil2.value);
+
+        if (Number.isNaN(a) || Number.isNaN(b)) {
+            output.textContent = "Masukkan bilangan";
+            return;
+        }
+
+        let hasil;
+
+        switch (operasi) {
+            case "+":
+                hasil = a + b;
+                break;
+            case "-":
+                hasil = a - b;
+                break;
+            case "*":
+                hasil = a * b;
+                break;
+            case "/":
+                hasil = b === 0 ? "Tidak dapat dibagi 0" : a / b;
+                break;
+        }
+
+        output.textContent =
+            typeof hasil === "number"
+                ? Number.isInteger(hasil)
+                    ? hasil
+                    : hasil.toFixed(2).replace(/\.?0+$/, "")
+                : hasil;
+    }
+
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            buttons.forEach(btn => btn.classList.remove("active"));
+            button.classList.add("active");
+            operasi = button.dataset.op;
+            hitung();
+        });
+    });
+
+    bil1.addEventListener("input", hitung);
+    bil2.addEventListener("input", hitung);
+
+    hitung();
+</script>
+</body>
+</html>
